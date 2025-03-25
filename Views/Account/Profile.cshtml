@@ -1,0 +1,88 @@
+@{
+    ViewData["Title"] = "Kullanıcı Profili";
+}
+
+<div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Kullanıcı Bilgileri</h1>
+
+        <div class="space-y-4">
+            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">İsim</h3>
+                        <p class="mt-1 text-lg text-gray-900 dark:text-white">@User.FindFirst("given_name")?.Value
+                            @User.FindFirst("family_name")?.Value</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Kullanıcı Adı</h3>
+                        <p class="mt-1 text-lg text-gray-900 dark:text-white">
+                            @User.FindFirst("preferred_username")?.Value</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">E-posta</h3>
+                        <p class="mt-1 text-lg text-gray-900 dark:text-white">@User.FindFirst("email")?.Value</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Departman</h3>
+                        <p class="mt-1 text-lg text-gray-900 dark:text-white">@User.FindFirst("department")?.Value</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Roller</h3>
+                <div class="flex flex-wrap gap-2">
+                    @foreach (var claim in User.Claims.Where(c => c.Type == "roles" || c.Type == "role"))
+                    {
+                        <span
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                            @claim.Value
+                        </span>
+                    }
+                </div>
+            </div>
+
+            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Tüm Claims</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-100 dark:bg-gray-800">
+                            <tr>
+                                <th scope="col"
+                                    class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    Tip</th>
+                                <th scope="col"
+                                    class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    Değer</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600">
+                            @foreach (var claim in User.Claims)
+                            {
+                                <tr>
+                                    <td
+                                        class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                        @claim.Type</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                        @claim.Value</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                           
+                            
+                           
+                                   
+                                    
+                                   
+                                    
+                                       
+                                        
+                                        

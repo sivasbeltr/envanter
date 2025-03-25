@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+html {
+  position: relative;
+  min-height: 100%;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Custom transitions */
+.tree-content {
+  transition: all 0.3s ease;
+}
+
+.tree-toggle .fa-chevron-down {
+  transition: transform 0.3s ease;
+}
+
+/* Active navigation styles */
+.sidebar-active {
+  @apply bg-blue-50 text-primary border-l-4 border-primary;
+}
+
+.dark .sidebar-active {
+  @apply bg-gray-700 text-blue-400 border-l-4 border-blue-400;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 dark:bg-gray-600 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500 dark:bg-gray-500;
+}
+
+/* Focus styles */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus,
+button:focus {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2 dark:ring-offset-gray-800;
+}
+
+/* Dark mode transitions */
+html.dark {
+  transition: background-color 0.3s ease;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating>.form-control-plaintext::placeholder,
+.form-floating>.form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating>.form-control-plaintext:focus::placeholder,
+.form-floating>.form-control:focus::placeholder {
+  text-align: start;
+}
+
+/* Notification dropdown styles */
+#notification-dropdown {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.notification-item {
+  transition: background-color 0.2s ease;
+}
+
+.notification-item:hover {
+  @apply bg-gray-50 dark:bg-gray-700;
+}

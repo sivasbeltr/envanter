@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="tr" class="h-full">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Envanter</title>
+    <link rel="stylesheet" href="~/css/tailwind.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="h-full bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <!-- Mobile sidebar backdrop -->
+    <div id="sidebar-backdrop"
+        class="fixed inset-0 bg-gray-800 bg-opacity-75 z-40 hidden transition-opacity duration-300 lg:hidden"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar"
+        class="fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 transform -translate-x-full lg:translate-x-0 z-50 transition duration-300 border-r border-gray-200 dark:border-gray-700 overflow-y-auto">
+        <!-- Sidebar header -->
+        <div class="flex items-center justify-between h-16 px-4 border-b border-gray-200 dark:border-gray-700">
+            <a href="/" class="flex items-center">
+                <span class="text-xl font-semibold text-primary dark:text-blue-400">Envanter</span>
+            </a>
+            <button id="close-sidebar-btn"
+                class="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 lg:hidden">
+                <span class="sr-only">Menüyü kapat</span>
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Sidebar content -->
+        <nav class="mt-4 px-2">
+            <div class="space-y-1">
+                <!-- Dashboard -->
+                <a asp-controller="Home" asp-action="Index"
+                    class="flex items-center p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <i
+                        class="fas fa-home w-6 text-gray-500 dark:text-gray-400 group-hover:text-primary dark:group-hover:text-blue-400"></i>
+                    <span>Ana Sayfa</span>
+                </a>
+
+                <!-- Stock tree menu -->
+                <div class="tree-menu">
+                    <button
+                        class="tree-toggle w-full flex items-center justify-between p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <div class="flex items-center">
+                            <i
+                                class="fas fa-boxes-stacked w-6 text-gray-500 dark:text-gray-400 group-hover:text-primary dark:group-hover:text-blue-400"></i>
+                            <span>Stok Yönetimi</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform"></i>
+                    </button>
+                    <div class="tree-content hidden pl-8 mt-1 space-y-1">
+                        <a href="#"
+                            class="flex items-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span>Stok Listesi</span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span>Stok Ekle</span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span>Stok Hareketleri</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Products tree menu -->
+                <div class="tree-menu">
+                    <button
+                        class="tree-toggle w-full flex items-center justify-between p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <div class="flex items-center">
+                            <i
+                                class="fas fa-tag w-6 text-gray-500 dark:text-gray-400 group-hover:text-primary dark:group-hover:text-blue-400"></i>
+                            <span>Ürünler</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform"></i>
+                    </button>
+                    <div class="tree-content hidden pl-8 mt-1 space-y-1">
+                        <a href="#"
+                            class="flex items-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span>Ürün Listesi</span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span>Ürün Ekle</span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span>Kategoriler</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Reports menu -->
+                <div class="tree-menu">
+                    <button
+                        class="tree-toggle w-full flex items-center justify-between p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <div class="flex items-center">
+                            <i
+                                class="fas fa-chart-line w-6 text-gray-500 dark:text-gray-400 group-hover:text-primary dark:group-hover:text-blue-400"></i>
+                            <span>Raporlar</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform"></i>
+                    </button>
+                    <div class="tree-content hidden pl-8 mt-1 space-y-1">
+                        <a href="#"
+                            class="flex items-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span>Stok Raporu</span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span>Hareket Raporu</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Settings menu -->
+                <div class="tree-menu">
+                    <button
+                        class="tree-toggle w-full flex items-center justify-between p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <div class="flex items-center">
+                            <i
+                                class="fas fa-cog w-6 text-gray-500 dark:text-gray-400 group-hover:text-primary dark:group-hover:text-blue-400"></i>
+                            <span>Ayarlar</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-xs transition-transform"></i>
+                    </button>
+                    <div class="tree-content hidden pl-8 mt-1 space-y-1">
+                        @if (User.IsInRole("admin"))
+                        {
+                            <a asp-controller="Settings" asp-action="Departments"
+                                class="flex items-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span>Birimler</span>
+                            </a>
+                            <a asp-controller="Settings" asp-action="Users"
+                                class="flex items-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span>Kullanıcılar</span>
+                            </a>
+                        }
+                        <a href="#"
+                            class="flex items-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span>Roller</span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span>Genel Ayarlar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main content wrapper -->
+    <div class="lg:pl-64 flex flex-col min-h-full">
+        <!-- Top navbar -->
+        <header
+            class="sticky top-0 z-40 bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+            <div class="px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Left section: Mobile menu button -->
+                    <div class="flex items-center lg:hidden">
+                        <button id="open-sidebar-btn"
+                            class="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <span class="sr-only">Menüyü aç</span>
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+
+                    <!-- Page title - show on larger screens -->
+                    <div class="hidden lg:block">
+                        <h1 class="text-xl font-semibold">@ViewData["Title"]</h1>
+                    </div>
+
+                    <!-- Right section: User menu, notifications, dark mode toggle -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Theme toggle -->
+                        <button id="theme-toggle"
+                            class="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-300">
+                            <span class="sr-only">Tema değiştir</span>
+                            <i id="theme-toggle-dark-icon" class="hidden fas fa-moon"></i>
+                            <i id="theme-toggle-light-icon" class="hidden fas fa-sun"></i>
+                        </button>
+
+                        <!-- Notifications dropdown -->
+                        <div class="relative">
+                            <button id="notification-btn"
+                                class="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-300">
+                                <span class="sr-only">Bildirimler</span>
+                                <i class="fas fa-bell"></i>
+                            </button>
+                            <!-- Notification badge -->
+                            <span id="notification-badge"
+                                class="absolute top-1 right-1 inline-flex items-center justify-center h-4 w-4 rounded-full bg-red-500 text-xs font-medium text-white">
+                                2
+                            </span>
+
+                            <!-- Notification dropdown -->
+                            <div id="notification-dropdown"
+                                class="hidden absolute right-0 mt-2 w-80 origin-top-right rounded-md bg-white dark:bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                                <div
+                                    class="py-2 px-3 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                                    <h3 class="text-sm font-medium text-gray-900 dark:text-white">Bildirimler</h3>
+                                    <button id="mark-all-read"
+                                        class="text-xs text-blue-600 dark:text-blue-400 hover:underline">
+                                        Tümünü okundu işaretle
+                                    </button>
+                                </div>
+                                <div class="max-h-60 overflow-y-auto" id="notification-list">
+                                    <!-- Notifications will be populated by JavaScript -->
+                                </div>
+                                <div class="py-2 px-3 border-t border-gray-200 dark:border-gray-700 text-center">
+                                    <a href="#" class="text-xs text-gray-600 dark:text-gray-400 hover:underline">
+                                        Tüm bildirimleri gör
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Replace the user menu with the login partial -->
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Page title for mobile -->
+        <div class="lg:hidden bg-white dark:bg-gray-800 px-4 py-2 shadow-sm">
+            <h1 class="text-lg font-semibold">@ViewData["Title"]</h1>
+        </div>
+
+        <!-- Main content -->
+        <main class="flex-1 p-4 sm:p-6 lg:p-8">
+            @RenderBody()
+        </main>
+
+        <!-- Footer -->
+        <footer
+            class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-4 px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-sm text-gray-500 dark:text-gray-400">
+                &copy; @DateTime.Now.Year - Envanter ve Barkod Sistemi -
+                <a asp-area="" asp-controller="Home" asp-action="Privacy"
+                    class="text-primary dark:text-blue-400 hover:underline">Gizlilik</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/js/dist/bundle.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

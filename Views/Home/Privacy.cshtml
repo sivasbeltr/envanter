@@ -1,0 +1,343 @@
+﻿@{
+    ViewData["Title"] = "Gizlilik Politikası";
+}
+
+<div class="space-y-8 max-w-4xl mx-auto">
+    <!-- Header Section -->
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">@ViewData["Title"]</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400">
+            Son güncelleme: @DateTime.Now.ToLocalTime().ToString("MMMM yyyy")
+        </p>
+    </div>
+
+    <!-- Introduction -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Giriş</h2>
+        <p class="text-gray-700 dark:text-gray-300 mb-4">
+            Bu gizlilik politikası, Envanter ve Barkod Sistemi'ni ("sistem") kullanımınızla ilgili kişisel verilerinizin
+            nasıl toplandığını, kullanıldığını ve
+            paylaşıldığını açıklamaktadır. Kullanıcıların gizliliği bizim için önemlidir ve bu belge, verilerinizin
+            nasıl korunduğunu anlamanıza yardımcı olacaktır.
+        </p>
+        <p class="text-gray-700 dark:text-gray-300">
+            Sistemi kullanarak, bu gizlilik politikasında belirtilen uygulamaları kabul etmiş olursunuz. Herhangi bir
+            sorunuz veya endişeniz varsa,
+            lütfen <span class="text-blue-600 dark:text-blue-400">akillisehir@sivas.bel.tr</span> adresinden bizimle
+            iletişime geçin.
+        </p>
+    </div>
+
+    <!-- Data Collection -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Veri Toplama</h2>
+        <div class="space-y-4">
+            <p class="text-gray-700 dark:text-gray-300">
+                Aşağıdaki durumlarda kişisel verilerinizi toplayabiliriz:
+            </p>
+
+            <div class="ml-5 space-y-4">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                        <div class="h-5 w-5 rounded-full bg-blue-500 flex items-center justify-center">
+                            <span class="text-white text-xs">1</span>
+                        </div>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-md font-medium text-gray-900 dark:text-white">Hesap Oluşturma ve Oturum
+                            Açma</h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Sisteme kayıt olurken veya giriş yaparken ad, soyad, e-posta adresi, departman ve rol gibi
+                            bilgiler toplanmaktadır.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                        <div class="h-5 w-5 rounded-full bg-blue-500 flex items-center justify-center">
+                            <span class="text-white text-xs">2</span>
+                        </div>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-md font-medium text-gray-900 dark:text-white">Sistem Kullanımı</h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Sistemdeki etkileşimleriniz, stok hareketleri, raporlar ve diğer işlemler kayıt altına
+                            alınmaktadır.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                        <div class="h-5 w-5 rounded-full bg-blue-500 flex items-center justify-center">
+                            <span class="text-white text-xs">3</span>
+                        </div>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-md font-medium text-gray-900 dark:text-white">Otomatik Veri Toplama</h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            IP adresi, tarayıcı bilgileri, cihaz bilgileri ve sistem kullanım istatistikleri otomatik
+                            olarak toplanabilir.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Usage -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Verilerin Kullanımı</h2>
+        <p class="text-gray-700 dark:text-gray-300 mb-4">
+            Topladığımız verileri aşağıdaki amaçlar doğrultusunda kullanmaktayız:
+        </p>
+
+        <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+            <li>Sisteme erişiminizi sağlamak ve kimliğinizi doğrulamak</li>
+            <li>Sistem fonksiyonlarını ve hizmetlerini sunmak</li>
+            <li>Kullanıcı deneyimini iyileştirmek ve kişiselleştirmek</li>
+            <li>Sistem güvenliğini ve bütünlüğünü korumak</li>
+            <li>Teknik sorunları tespit etmek ve çözmek</li>
+            <li>Yasal düzenlemelere uymak</li>
+        </ul>
+    </div>
+
+    <!-- Cookies -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Çerezler ve İzleme Teknolojileri</h2>
+        <p class="text-gray-700 dark:text-gray-300 mb-4">
+            Sistemimizde, kullanıcı deneyimini geliştirmek ve hizmetlerimizi iyileştirmek amacıyla çerezler ve benzer
+            teknolojiler kullanılmaktadır.
+        </p>
+
+        <div class="mt-4 bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+            <h3 class="text-md font-medium text-gray-900 dark:text-white mb-2">Kullanılan Çerez Türleri:</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <h4 class="font-medium text-gray-800 dark:text-gray-200">Zorunlu Çerezler</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Sistemin temel işlevlerini yerine getirmek için
+                        gereklidir.</p>
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-800 dark:text-gray-200">Tercih Çerezleri</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Dil ve tema gibi tercihlerinizi kaydetmek için
+                        kullanılır.</p>
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-800 dark:text-gray-200">Analitik Çerezler</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Sistem kullanımını analiz etmek için kullanılır.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-800 dark:text-gray-200">Oturum Çerezleri</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Oturum bilgilerini korumak için kullanılır.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Rights -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Kullanıcı Hakları</h2>
+        <p class="text-gray-700 dark:text-gray-300 mb-4">
+            Kişisel verilerinizle ilgili aşağıdaki haklara sahipsiniz:
+        </p>
+
+        <div class="space-y-3">
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                    <svg class="h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-gray-700 dark:text-gray-300">
+                        <span class="font-medium text-gray-900 dark:text-white">Erişim Hakkı:</span> Kişisel
+                        verilerinize erişim talep edebilirsiniz.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                    <svg class="h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-gray-700 dark:text-gray-300">
+                        <span class="font-medium text-gray-900 dark:text-white">Düzeltme Hakkı:</span> Yanlış veya eksik
+                        bilgilerinizin düzeltilmesini isteyebilirsiniz.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                    <svg class="h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-gray-700 dark:text-gray-300">
+                        <span class="font-medium text-gray-900 dark:text-white">Silme Hakkı:</span> Belirli koşullar
+                        altında verilerinizin silinmesini talep edebilirsiniz.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                    <svg class="h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-gray-700 dark:text-gray-300">
+                        <span class="font-medium text-gray-900 dark:text-white">İşleme Sınırlandırma Hakkı:</span>
+                        Verilerinizin işlenmesini sınırlandırmayı talep edebilirsiniz.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+            <p class="text-sm text-blue-800 dark:text-blue-200">
+                Bu haklarınızı kullanmak için <span class="font-medium">destek@envanter.org</span> adresine e-posta
+                gönderebilirsiniz.
+                Talebinizi en geç 30 gün içerisinde yanıtlayacağız.
+            </p>
+        </div>
+    </div>
+
+    <!-- Security -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Veri Güvenliği</h2>
+        <p class="text-gray-700 dark:text-gray-300 mb-4">
+            Kişisel verilerinizin güvenliği bizim için önemlidir. Verilerinizi korumak için aşağıdaki güvenlik
+            önlemlerini uygulamaktayız:
+        </p>
+
+        <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+            <li>Veri şifreleme protokolleri (SSL/TLS)</li>
+            <li>Güvenli donanım ve yazılım sistemleri</li>
+            <li>Erişim kontrolü ve kimlik doğrulama mekanizmaları</li>
+            <li>Düzenli güvenlik denetimleri ve testleri</li>
+            <li>Personel eğitimi ve farkındalık programları</li>
+        </ul>
+    </div>
+
+    <!-- Policy Updates -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Gizlilik Politikası Güncellemeleri</h2>
+        <p class="text-gray-700 dark:text-gray-300">
+            Bu gizlilik politikasını zaman zaman güncelleyebiliriz. Değişiklikler yapıldığında, yeni politikanın
+            yayınlanma tarihini bu sayfada belirteceğiz.
+            Önemli değişiklikler durumunda, sistem üzerinden bildirim gönderebilir veya e-posta ile iletişime
+            geçebiliriz.
+        </p>
+
+        <div class="mt-6 flex items-center">
+            <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                     fill="currentColor">
+                    <path fill-rule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z"
+                          clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="ml-3">
+                <p class="text-sm text-gray-700 dark:text-gray-300">
+                    Sistemi kullanmaya devam etmeniz, güncel gizlilik politikasını kabul ettiğiniz anlamına gelir.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">İletişim Bilgileri</h2>
+        <p class="text-gray-700 dark:text-gray-300 mb-6">
+            Bu gizlilik politikası veya kişisel verilerinizin işlenmesiyle ilgili sorularınız varsa, lütfen aşağıdaki
+            iletişim bilgilerini kullanarak bize ulaşın:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-md font-medium text-gray-900 dark:text-white">E-posta</h3>
+                    <p class="text-gray-700 dark:text-gray-300">akillisehir@sivas.bel.tr</p>
+                </div>
+            </div>
+
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-md font-medium text-gray-900 dark:text-white">Geliştirici</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Sivas Belediyesi Akıllı Şehir Müdürlüğü</p>
+                </div>
+            </div>
+
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-md font-medium text-gray-900 dark:text-white">Adres</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Sivas, Türkiye</p>
+                </div>
+            </div>
+
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-md font-medium text-gray-900 dark:text-white">Veri Sorumlusu</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Kullanıcılar</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center text-sm text-gray-600 dark:text-gray-400 mt-8">
+        <p>© @DateTime.Now.Year Envanter ve Barkod Sistemi. Tüm hakları kamuya aittir.</p>
+    </div>
+</div>

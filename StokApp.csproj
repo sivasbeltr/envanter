@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="9.0.3" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.7.0" />
+  </ItemGroup>
+
+  <!-- Add Target to Run npm build before standard build/publish/run -->
+  <Target Name="NpmBuild" BeforeTargets="Build;Publish;Run;PrepareForRun">
+    <Exec Command="npm run build" WorkingDirectory="$(ProjectDir)" ContinueOnError="false" />
+    <Message Text="Tailwind CSS and TypeScript compiled successfully" Importance="high" />
+  </Target>
+
+  <!-- Add Target for npm install if package-lock.json or package.json changes -->
+  <Target Name="NpmInstall" BeforeTargets="NpmBuild">
+    <PropertyGroup>
+      <PackageJsonPath>$(ProjectDir)package.json</PackageJsonPath>
+      <PackageLockPath>$(ProjectDir)package-lock.json</PackageLockPath>
+      <NodeModulesPath>$(ProjectDir)node_modules</NodeModulesPath>
+    </PropertyGroup>
+    
+    <!-- Run npm install if node_modules doesn't exist or if package.json has changed -->
+    <Exec 
+      Command="npm install"
+      WorkingDirectory="$(ProjectDir)"
+      Condition="!Exists('$(NodeModulesPath)') Or $([System.IO.File]::GetLastWriteTime('$(PackageJsonPath)').Ticks) > $([System.IO.File]::GetLastWriteTime('$(NodeModulesPath)').Ticks)" />
+  </Target>
+
+  <!-- Create Scripts directory if it doesn't exist -->
+  <Target Name="CreateTypeScriptDirectories" BeforeTargets="NpmBuild">
+    <MakeDir Directories="$(ProjectDir)Scripts" Condition="!Exists('$(ProjectDir)Scripts')" />
+  </Target>
+
+</Project>
