@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import Dialog from '../components/Dialog';
+import Dialog from '../components/dialogs/Dialog';
 
 interface Product {
     id: number;

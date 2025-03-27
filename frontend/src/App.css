@@ -52,3 +52,77 @@ body {
 .read-the-docs {
   color: #888;
 }
+
+/* Stepper container */
+.stepper {
+  position: relative;
+  width: 100%;
+}
+
+/* Horizontal stepper styles */
+.stepper.flex.items-center {
+  min-height: 80px;
+}
+
+/* Vertical stepper styles */
+.stepper.flex.flex-col {
+  min-height: 200px;
+}
+
+/* Step indicator styles */
+.stepper-item {
+  position: relative;
+  z-index: 10;
+}
+
+/* Connector line for horizontal stepper */
+.stepper-connector-horizontal {
+  position: absolute;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* Connector line for vertical stepper */
+.stepper-connector-vertical {
+  position: absolute;
+  width: 2px;
+  left: 14px;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+/* Step indicator dot styles */
+.stepper-dot {
+  position: relative;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  box-sizing: border-box;
+}
+
+/* Step content styles */
+.stepper-content {
+  position: relative;
+  z-index: 5;
+}
+
+/* Ensure all step indicators appear above connector lines */
+.stepper .stepper-dot {
+  box-shadow: 0 0 0 4px white;
+}
+
+.dark .stepper .stepper-dot {
+  box-shadow: 0 0 0 4px #1f2937;
+}
+
+/* Fix for vertical stepper connector positioning */
+.stepper.flex.flex-col .stepper-connector-vertical {
+  left: 14px;
+}

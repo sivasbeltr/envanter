@@ -14,28 +14,28 @@
 
   <!-- Add Target to Run npm build before standard build/publish/run -->
   <Target Name="NpmBuild" BeforeTargets="Build;Publish;Run;PrepareForRun">
-    <Exec Command="npm run build" WorkingDirectory="$(ProjectDir)frontend" ContinueOnError="false" />
+    <Exec Command="npm run build" WorkingDirectory="$(ProjectDir)" ContinueOnError="false" />
     <Message Text="Tailwind CSS and TypeScript compiled successfully" Importance="high" />
   </Target>
 
   <!-- Add Target for npm install if package-lock.json or package.json changes -->
   <Target Name="NpmInstall" BeforeTargets="NpmBuild">
     <PropertyGroup>
-      <PackageJsonPath>$(ProjectDir)frontend/package.json</PackageJsonPath>
-      <PackageLockPath>$(ProjectDir)frontend/package-lock.json</PackageLockPath>
-      <NodeModulesPath>$(ProjectDir)frontend/node_modules</NodeModulesPath>
+      <PackageJsonPath>$(ProjectDir)package.json</PackageJsonPath>
+      <PackageLockPath>$(ProjectDir)package-lock.json</PackageLockPath>
+      <NodeModulesPath>$(ProjectDir)node_modules</NodeModulesPath>
     </PropertyGroup>
     
     <!-- Run npm install if node_modules doesn't exist or if package.json has changed -->
     <Exec 
       Command="npm install"
-      WorkingDirectory="$(ProjectDir)frontend"
+      WorkingDirectory="$(ProjectDir)"
       Condition="!Exists('$(NodeModulesPath)') Or $([System.IO.File]::GetLastWriteTime('$(PackageJsonPath)').Ticks) > $([System.IO.File]::GetLastWriteTime('$(NodeModulesPath)').Ticks)" />
   </Target>
 
   <!-- Create Scripts directory if it doesn't exist -->
   <Target Name="CreateTypeScriptDirectories" BeforeTargets="NpmBuild">
-    <MakeDir Directories="$(ProjectDir)frontend/Scripts" Condition="!Exists('$(ProjectDir)frontend/Scripts')" />
+    <MakeDir Directories="$(ProjectDir)Scripts" Condition="!Exists('$(ProjectDir)Scripts')" />
   </Target>
 
 </Project>
