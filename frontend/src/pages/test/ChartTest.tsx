@@ -169,7 +169,6 @@ const ChartTest: React.FC = () => {
             {/* Bar Chart Examples */}
             <Panel
                 title="Çubuk Grafik Örnekleri"
-                subtitle="Bar Chart"
                 variant="elevated"
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -228,7 +227,6 @@ const ChartTest: React.FC = () => {
             {/* Line Chart Examples */}
             <Panel
                 title="Çizgi Grafik Örnekleri"
-                subtitle="Line Chart"
                 variant="elevated"
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -282,7 +280,6 @@ const ChartTest: React.FC = () => {
             {/* Pie & Doughnut Chart Examples */}
             <Panel
                 title="Pasta ve Halka Grafik Örnekleri"
-                subtitle="Pie & Doughnut Charts"
                 variant="elevated"
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -341,7 +338,6 @@ const ChartTest: React.FC = () => {
             {/* Chart Responsiveness Demo */}
             <Panel
                 title="Duyarlı Grafikler"
-                subtitle="Farklı boyutlarda grafikler"
                 variant="elevated"
             >
                 <div className="space-y-6">

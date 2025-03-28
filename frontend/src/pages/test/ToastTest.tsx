@@ -22,7 +22,6 @@ const ToastTest: React.FC = () => {
 
             <Panel
                 title="Temel Toast Bildirimleri"
-                subtitle="Farklı tiplerde toast bildirimleri göstermek için aşağıdaki butonları kullanabilirsiniz."
                 variant="elevated"
                 className="mb-6"
             >

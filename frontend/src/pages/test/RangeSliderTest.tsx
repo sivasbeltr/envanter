@@ -179,7 +179,6 @@ const RangeSliderTest: React.FC = () => {
             {/* Original Range Slider Examples (for comparison) */}
             <Panel
                 title="Eski Stil Aralık Seçiciler"
-                subtitle="Karşılaştırma için"
                 variant="elevated"
                 className="mb-6"
             >

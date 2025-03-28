@@ -97,7 +97,6 @@ const InputTest: React.FC = () => {
             {/* AutoComplete Examples */}
             <Panel
                 title="Otomatik Tamamlama (AutoComplete)"
-                subtitle="Farklı özelliklerde otomatik tamamlama örnekleri"
                 variant="elevated"
                 className="mb-6"
             >

@@ -97,7 +97,6 @@ const TimelineTest: React.FC = () => {
             {/* Horizontal Timeline */}
             <Panel
                 title="Yatay Timeline"
-                subtitle="Soldan sağa doğru ilerleyen adımlar"
                 variant="elevated"
                 className="mb-6"
             >
@@ -138,7 +137,6 @@ const TimelineTest: React.FC = () => {
             {/* Interactive Timeline */}
             <Panel
                 title="Etkileşimli Timeline"
-                subtitle="Tıklanabilir adımlar içeren zamanlama"
                 variant="elevated"
                 className="mb-6"
             >

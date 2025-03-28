@@ -241,7 +241,6 @@ const StepperTest: React.FC = () => {
             {/* Interactive Stepper Example */}
             <Panel
                 title="Etkileşimli Stepper Örneği"
-                subtitle="Tıklanabilir adımlar ve adım içerikleri"
                 variant="elevated"
                 className="mb-6"
             >

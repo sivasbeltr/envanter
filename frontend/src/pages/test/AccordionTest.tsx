@@ -44,7 +44,6 @@ const AccordionTest: React.FC = () => {
 
             <Panel
                 title="Çoklu Genişleme"
-                subtitle="Bu örnekte birden fazla öğe aynı anda açık olabilir"
                 variant="elevated"
                 className="mb-6"
             >
@@ -69,7 +68,6 @@ const AccordionTest: React.FC = () => {
 
             <Panel
                 title="Farklı Varyantlar"
-                subtitle="Accordion'un farklı görsel stilleri"
                 variant="elevated"
                 className="mb-6"
             >
