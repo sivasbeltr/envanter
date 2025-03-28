@@ -35,11 +35,11 @@ const RangeSliderTest: React.FC = () => {
         new Date(currentYear, today.getMonth() + 1, 0)
     ]);
 
-    // Example time range (9 AM to 5 PM)
-    const [timeRange, setTimeRange] = useState<[number, number]>([540, 1020]);
+    // Example time range (9 AM to 5 PM in seconds)
+    const [timeRange, setTimeRange] = useState<[number, number]>([32400, 61200]); // 9:00:00 AM to 5:00:00 PM
 
-    // Example custom time range (work hours)
-    const [workHours, setWorkHours] = useState<[number, number]>([480, 1080]); // 8:00 AM to 6:00 PM
+    // Example custom time range (work hours in seconds)
+    const [workHours, setWorkHours] = useState<[number, number]>([28800, 64800]); // 8:00:00 AM to 6:00:00 PM
 
     // Mock chart data for LineChart used as background
     const mockChartData = {
@@ -55,6 +55,14 @@ const RangeSliderTest: React.FC = () => {
             fill: true,
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
         }]
+    };
+
+    // Zamanı saniyeden HH:MM:SS formatına çeviren yardımcı fonksiyon
+    const formatTimeFromSeconds = (seconds: number) => {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
+        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
     };
 
     return (
@@ -134,12 +142,13 @@ const RangeSliderTest: React.FC = () => {
                         <TimeRangeBrush
                             value={timeRange}
                             onChange={setTimeRange}
+                            onChangeEnd={(finalRange) => console.log('Time range finalized:', finalRange)} // Opsiyonel
                             height={60}
                         />
                         <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                             Seçilen Saat Aralığı:
                             <span className="font-medium ml-1">
-                                {Math.floor(timeRange[0] / 60)}:{String(timeRange[0] % 60).padStart(2, '0')} - {Math.floor(timeRange[1] / 60)}:{String(timeRange[1] % 60).padStart(2, '0')}
+                                {formatTimeFromSeconds(timeRange[0])} - {formatTimeFromSeconds(timeRange[1])}
                             </span>
                         </div>
                     </div>
@@ -152,10 +161,17 @@ const RangeSliderTest: React.FC = () => {
                         <TimeRangeBrush
                             value={workHours}
                             onChange={setWorkHours}
+                            onChangeEnd={(finalRange) => console.log('Work hours finalized:', finalRange)} // Opsiyonel
                             height={60}
                             use24Hour={false}
                             selectionColor={theme === 'dark' ? 'rgba(139, 92, 246, 0.3)' : 'rgba(124, 58, 237, 0.2)'}
                         />
+                        <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                            Seçilen Saat Aralığı:
+                            <span className="font-medium ml-1">
+                                {formatTimeFromSeconds(workHours[0])} - {formatTimeFromSeconds(workHours[1])}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </Panel>
@@ -190,8 +206,8 @@ const RangeSliderTest: React.FC = () => {
                         </h3>
                         <div className="px-4 py-6">
                             <TimeRangeSlider
-                                value={timeRange}
-                                onChange={setTimeRange}
+                                value={timeRange.map(t => Math.floor(t / 60)) as [number, number]} // Saniyeyi dakikaya çevir
+                                onChange={(newRange) => setTimeRange([newRange[0] * 60, newRange[1] * 60])}
                                 stepMinutes={30}
                                 tickCount={8}
                                 primaryColor={theme === 'dark' ? '#60a5fa' : '#3b82f6'}

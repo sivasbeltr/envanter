@@ -95,7 +95,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
                         <Button
                             variant={confirmVariant}
                             onClick={onConfirm}
-                            isLoading={isConfirmLoading}
+                            loading={isConfirmLoading}
                             disabled={isConfirmDisabled}
                             className="w-full sm:w-auto sm:ml-3"
                         >

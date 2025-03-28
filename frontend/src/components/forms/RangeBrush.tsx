@@ -5,6 +5,7 @@ export interface RangeBrushProps {
     max: number;
     value: [number, number];
     onChange: (value: [number, number]) => void;
+    onChangeEnd?: (value: [number, number]) => void; // Yeni eklenen prop
     height?: number;
     backgroundElement?: React.ReactNode;
     showLabels?: boolean;
@@ -24,6 +25,7 @@ const RangeBrush: React.FC<RangeBrushProps> = ({
     max,
     value,
     onChange,
+    onChangeEnd, // Yeni eklenen prop
     height = 80,
     backgroundElement,
     showLabels = true,
@@ -72,12 +74,6 @@ const RangeBrush: React.FC<RangeBrushProps> = ({
         return ((val - min) / (max - min)) * 100;
     }, [min, max]);
 
-    const getValueFromPosition = useCallback((posX: number) => {
-        if (!rect) return min;
-        const percentage = Math.min(Math.max(0, posX / rect.width), 1);
-        let rawValue = min + percentage * (max - min);
-        return step ? roundToStep(rawValue) : Math.min(Math.max(min, rawValue), max);
-    }, [min, max, rect, step, roundToStep]);
 
     const startDrag = useCallback((
         e: React.MouseEvent | React.TouchEvent,
@@ -137,7 +133,10 @@ const RangeBrush: React.FC<RangeBrushProps> = ({
     const endDrag = useCallback(() => {
         setIsDragging(null);
         setTimeout(() => setShowTooltip(null), 500);
-    }, []);
+        if (onChangeEnd) {
+            onChangeEnd(selectionRange); // Yeni eklenen onChangeEnd çağrısı
+        }
+    }, [selectionRange, onChangeEnd]);
 
     useEffect(() => {
         if (isDragging) {

@@ -1,77 +1,136 @@
-import React from 'react';
-import { Button } from '../../components/common/Button';
+import React, { useState } from 'react';
+import { Button, ButtonVariant, ButtonSize } from '../../components/common/Button';
+import {
+    PlusIcon, ChevronRightIcon, ChevronDownIcon,
+    DocumentArrowDownIcon, TrashIcon, PencilIcon, ArrowPathIcon
+} from '@heroicons/react/24/solid';
 
-/**
- * Test component for Button examples
- */
 const ButtonTest: React.FC = () => {
+    const [loading, setLoading] = useState(false);
+
+    // Simüle edilmiş yükleme efekti
+    const handleLoadingClick = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+    };
+
+    const variants: ButtonVariant[] = [
+        'primary', 'secondary', 'success', 'danger',
+        'warning', 'info', 'light', 'dark', 'outline', 'link'
+    ];
+
+    const sizes: ButtonSize[] = ['xs', 'sm', 'md', 'lg', 'xl'];
+
     return (
-        <section>
-            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Buton Örnekleri</h2>
+        <div className="container mx-auto p-4">
+            <h1 className="mb-6 text-2xl font-semibold">Button Bileşeni Testi</h1>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {/* Button Variants */}
-                <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-                    <h3 className="font-medium mb-2 text-gray-800 dark:text-gray-200">Buton Varyantları</h3>
-                    <div className="flex flex-wrap gap-2">
-                        <Button variant="primary">Primary</Button>
-                        <Button variant="secondary">Secondary</Button>
-                        <Button variant="success">Success</Button>
-                        <Button variant="danger">Danger</Button>
-                        <Button variant="warning">Warning</Button>
-                        <Button variant="info">Info</Button>
-                    </div>
-                </div>
-
-                {/* Button Sizes */}
-                <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-                    <h3 className="font-medium mb-2 text-gray-800 dark:text-gray-200">Buton Boyutları</h3>
-                    <div className="flex flex-wrap items-center gap-2">
-                        <Button size="sm">Küçük</Button>
-                        <Button size="md">Orta</Button>
-                        <Button size="lg">Büyük</Button>
-                    </div>
-                </div>
-
-                {/* Button States */}
-                <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-                    <h3 className="font-medium mb-2 text-gray-800 dark:text-gray-200">Buton Durumları</h3>
-                    <div className="flex flex-wrap gap-2">
-                        <Button disabled>Devre Dışı</Button>
-                        <Button isLoading>Yükleniyor</Button>
-                        <Button fullWidth>Tam Genişlik</Button>
-                    </div>
-                </div>
-
-                {/* Button with Icons */}
-                <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-                    <h3 className="font-medium mb-2 text-gray-800 dark:text-gray-200">İkonlu Butonlar</h3>
-                    <div className="flex flex-wrap gap-2">
-                        <Button
-                            variant="primary"
-                            startIcon={
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-                                </svg>
-                            }
-                        >
-                            Ekle
+            <section className="mb-8">
+                <h2 className="mb-4 text-xl font-medium">Varyasyonlar</h2>
+                <div className="flex flex-wrap gap-4">
+                    {variants.map((variant) => (
+                        <Button key={variant} variant={variant}>
+                            {variant.charAt(0).toUpperCase() + variant.slice(1)}
                         </Button>
+                    ))}
+                </div>
+            </section>
 
-                        <Button
-                            variant="secondary"
-                            endIcon={
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                                </svg>
-                            }
-                        >
-                            İleri
+            <section className="mb-8">
+                <h2 className="mb-4 text-xl font-medium">Boyutlar</h2>
+                <div className="flex flex-wrap items-center gap-4">
+                    {sizes.map((size) => (
+                        <Button key={size} size={size}>
+                            {size.toUpperCase()}
                         </Button>
+                    ))}
+                </div>
+            </section>
+
+            <section className="mb-8">
+                <h2 className="mb-4 text-xl font-medium">İkonlu Düğmeler</h2>
+                <div className="flex flex-wrap gap-4">
+                    <Button leftIcon={PlusIcon}>Ekle</Button>
+                    <Button rightIcon={ChevronRightIcon}>İlerle</Button>
+                    <Button variant="success" leftIcon={DocumentArrowDownIcon}>Kaydet</Button>
+                    <Button variant="danger" leftIcon={TrashIcon}>Sil</Button>
+                    <Button variant="warning" leftIcon={PencilIcon}>Düzenle</Button>
+                    <Button variant="info" leftIcon={ArrowPathIcon} rightIcon={ChevronDownIcon}>Yenile</Button>
+                    <Button variant="outline" leftIcon={PlusIcon}>Yeni</Button>
+                </div>
+            </section>
+
+            <section className="mb-8">
+                <h2 className="mb-4 text-xl font-medium">Tam Genişlik</h2>
+                <div className="space-y-2">
+                    <Button fullWidth>Tam Genişlik Düğme</Button>
+                    <Button fullWidth variant="success">Tam Genişlik Başarı Düğmesi</Button>
+                    <Button fullWidth variant="outline">Tam Genişlik Ana Hat Düğmesi</Button>
+                </div>
+            </section>
+
+            <section className="mb-8">
+                <h2 className="mb-4 text-xl font-medium">Yuvarlak</h2>
+                <div className="flex flex-wrap gap-4">
+                    <Button rounded>Yuvarlak Düğme</Button>
+                    <Button rounded variant="success" leftIcon={PlusIcon}>İkonlu Yuvarlak</Button>
+                    <Button rounded variant="outline">Yuvarlak Ana Hat</Button>
+                </div>
+            </section>
+
+            <section className="mb-8">
+                <h2 className="mb-4 text-xl font-medium">Durum Düğmeleri</h2>
+                <div className="flex flex-wrap gap-4">
+                    <Button disabled>Devre Dışı</Button>
+                    <Button loading>Yükleniyor</Button>
+                    <Button loading={loading} onClick={handleLoadingClick}>
+                        {loading ? 'Yükleniyor...' : 'Yükleme Simülasyonu'}
+                    </Button>
+                </div>
+            </section>
+
+            <section className="mb-8">
+                <h2 className="mb-4 text-xl font-medium">Uygulama Örnekleri</h2>
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                    <div className="rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+                        <h3 className="mb-4 text-lg font-medium">Form Düğmeleri</h3>
+                        <div className="flex flex-wrap justify-end gap-2">
+                            <Button variant="light">İptal</Button>
+                            <Button>Kaydet</Button>
+                        </div>
+                    </div>
+
+                    <div className="rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+                        <h3 className="mb-4 text-lg font-medium">İşlem Düğmeleri</h3>
+                        <div className="flex flex-wrap gap-2">
+                            <Button variant="outline" leftIcon={PencilIcon}>Düzenle</Button>
+                            <Button variant="danger" leftIcon={TrashIcon}>Sil</Button>
+                            <Button variant="success" leftIcon={ArrowPathIcon}>Yenile</Button>
+                        </div>
+                    </div>
+
+                    <div className="rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+                        <h3 className="mb-4 text-lg font-medium">Adım Kontrolleri</h3>
+                        <div className="flex justify-between">
+                            <Button variant="outline" leftIcon={ChevronRightIcon}>Önceki</Button>
+                            <Button rightIcon={ChevronRightIcon}>Sonraki</Button>
+                        </div>
+                    </div>
+
+                    <div className="rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+                        <h3 className="mb-4 text-lg font-medium">Filtre Düğmeleri</h3>
+                        <div className="flex flex-wrap gap-2">
+                            <Button size="sm" variant="light">Tümü</Button>
+                            <Button size="sm" variant="primary">Aktif</Button>
+                            <Button size="sm" variant="light">Bekleyen</Button>
+                            <Button size="sm" variant="light">İptal Edildi</Button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     );
 };
 

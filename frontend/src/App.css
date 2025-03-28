@@ -126,3 +126,28 @@ body {
 .stepper.flex.flex-col .stepper-connector-vertical {
   left: 14px;
 }
+
+/* Progress Bar Animations */
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 1rem 0;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+@keyframes progress-indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-progress-indeterminate {
+  animation: progress-indeterminate 1.5s infinite cubic-bezier(0.65, 0.815, 0.735, 0.395);
+}

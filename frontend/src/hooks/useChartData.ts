@@ -33,6 +33,8 @@ export interface ChartDataResult<T = any> {
     stopRefresh: () => void;
     /** Function to start auto-refresh */
     startRefresh: () => void;
+    /** Whether auto-refresh is currently active */
+    isRefreshActive: boolean;
 }
 
 /**
@@ -126,6 +128,7 @@ export function useChartData<T = any>(options: ChartDataOptions<T>): ChartDataRe
         error,
         refresh: fetchData,
         stopRefresh: stopRefreshTimer,
-        startRefresh: startRefreshTimer
+        startRefresh: startRefreshTimer,
+        isRefreshActive
     };
 }

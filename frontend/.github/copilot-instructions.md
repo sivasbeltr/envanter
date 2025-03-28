@@ -79,6 +79,22 @@
 - Include the municipality logo in appropriate locations
 - Follow accessibility guidelines for text and interactive elements
 
+### Icon Usage
+- Use Heroicons (@heroicons/react) package for all icons in the application
+- Import icons from the appropriate style collection:
+  ```typescript
+  import { BeakerIcon } from '@heroicons/react/24/solid'; // Solid style
+  import { BeakerIcon } from '@heroicons/react/24/outline'; // Outline style
+  ```
+- Use icons consistently throughout the application
+- Use appropriate sizing through Tailwind classes:
+  ```tsx
+  <BeakerIcon className="h-6 w-6 text-blue-500" /> // Fixed size with color
+  <BeakerIcon className="size-6 text-blue-500" /> // Using size shorthand
+  ```
+- Apply different colors to icons using Tailwind text-color classes
+- For icon buttons, ensure proper accessibility by adding aria-label attributes
+
 ### Mobile-First Approach
 - Design all components mobile-first, then scale up
 - Use provided responsive breakpoints:

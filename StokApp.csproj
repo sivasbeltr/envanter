@@ -4,6 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <FrontendDirectory>$(ProjectDir)frontend</FrontendDirectory>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,28 +15,29 @@
 
   <!-- Add Target to Run npm build before standard build/publish/run -->
   <Target Name="NpmBuild" BeforeTargets="Build;Publish;Run;PrepareForRun">
-    <Exec Command="npm run build" WorkingDirectory="$(ProjectDir)" ContinueOnError="false" />
+    <Exec Command="npm run build" WorkingDirectory="$(FrontendDirectory)" ContinueOnError="false" />
     <Message Text="Tailwind CSS and TypeScript compiled successfully" Importance="high" />
   </Target>
 
   <!-- Add Target for npm install if package-lock.json or package.json changes -->
   <Target Name="NpmInstall" BeforeTargets="NpmBuild">
     <PropertyGroup>
-      <PackageJsonPath>$(ProjectDir)package.json</PackageJsonPath>
-      <PackageLockPath>$(ProjectDir)package-lock.json</PackageLockPath>
-      <NodeModulesPath>$(ProjectDir)node_modules</NodeModulesPath>
+      <PackageJsonPath>$(FrontendDirectory)\package.json</PackageJsonPath>
+      <PackageLockPath>$(FrontendDirectory)\package-lock.json</PackageLockPath>
+      <NodeModulesPath>$(FrontendDirectory)\node_modules</NodeModulesPath>
     </PropertyGroup>
     
     <!-- Run npm install if node_modules doesn't exist or if package.json has changed -->
     <Exec 
       Command="npm install"
-      WorkingDirectory="$(ProjectDir)"
+      WorkingDirectory="$(FrontendDirectory)"
       Condition="!Exists('$(NodeModulesPath)') Or $([System.IO.File]::GetLastWriteTime('$(PackageJsonPath)').Ticks) > $([System.IO.File]::GetLastWriteTime('$(NodeModulesPath)').Ticks)" />
   </Target>
 
-  <!-- Create Scripts directory if it doesn't exist -->
-  <Target Name="CreateTypeScriptDirectories" BeforeTargets="NpmBuild">
-    <MakeDir Directories="$(ProjectDir)Scripts" Condition="!Exists('$(ProjectDir)Scripts')" />
+  <!-- Create frontend directory structure if it doesn't exist -->
+  <Target Name="CreateFrontendDirectories" BeforeTargets="NpmInstall">
+    <MakeDir Directories="$(FrontendDirectory)" Condition="!Exists('$(FrontendDirectory)')" />
+    <MakeDir Directories="$(FrontendDirectory)\Scripts" Condition="!Exists('$(FrontendDirectory)\Scripts')" />
   </Target>
 
 </Project>

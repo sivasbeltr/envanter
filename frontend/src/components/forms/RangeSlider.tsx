@@ -33,7 +33,6 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
     trackHeight = 6,
     handleSize = 20,
     primaryColor = '#3b82f6',
-    secondaryColor = '#e5e7eb',
     showTicks = false,
     tickCount = 10,
     showLabels = true,
@@ -83,7 +82,6 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
     const startDrag = useCallback((e: React.MouseEvent | React.TouchEvent, type: 'min' | 'max' | 'range') => {
         if (disabled) return;
         e.preventDefault();
-        const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
         const rect = updateRect();
         if (!rect) return;
 
