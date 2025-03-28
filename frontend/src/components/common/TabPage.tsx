@@ -1,20 +1,21 @@
 import React from 'react';
+import { classNames } from '../../utils/classNames';
 
 /**
  * Props for the TabPage component
  */
 export interface TabPageProps {
-    /** The value of the tab this page is associated with */
+    /** The value of the tab, should be unique */
     value: string;
-    /** The display label for the tab */
+    /** The label of the tab displayed in the tab bar */
     label: string;
-    /** Optional icon for the tab */
-    icon?: React.ReactNode;
     /** Whether the tab is disabled */
     disabled?: boolean;
-    /** The content of the tab page */
+    /** The content to render when this tab is active */
     children: React.ReactNode;
-    /** Additional class names */
+    /** Icon to display next to the tab label */
+    icon?: React.ReactNode;
+    /** Additional CSS classes for the tab content */
     className?: string;
 }
 
@@ -28,16 +29,12 @@ export interface TabPageProps {
  * </TabPage>
  */
 export const TabPage: React.FC<TabPageProps> = ({
-    value,
     children,
     className = '',
+    // Other props are used by TabBar parent
 }) => {
     return (
-        <div
-            role="tabpanel"
-            aria-labelledby={`tab-${value}`}
-            className={`tab-content ${className}`}
-        >
+        <div className={classNames('tab-content text-gray-800 dark:text-gray-200', className)}>
             {children}
         </div>
     );

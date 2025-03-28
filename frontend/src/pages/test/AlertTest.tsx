@@ -52,10 +52,10 @@ const AlertTest: React.FC = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className="mb-6 text-2xl font-semibold">Alert Bileşeni Testi</h1>
+            <h1 className="mb-6 text-2xl font-semibold text-gray-900 dark:text-white">Alert Bileşeni Testi</h1>
 
             <div className="mb-8">
-                <h2 className="mb-4 text-xl font-medium">Yeni Alert Ekle</h2>
+                <h2 className="mb-4 text-xl font-medium text-gray-800 dark:text-gray-200">Yeni Alert Ekle</h2>
                 <div className="flex flex-wrap gap-2">
                     <Button onClick={() => addAlert('info')}>Bilgi</Button>
                     <Button onClick={() => addAlert('success')}>Başarılı</Button>
@@ -71,7 +71,7 @@ const AlertTest: React.FC = () => {
             </div>
 
             <div className="space-y-4">
-                <h2 className="mb-4 text-xl font-medium">Aktif Alertler</h2>
+                <h2 className="mb-4 text-xl font-medium text-gray-800 dark:text-gray-200">Aktif Alertler</h2>
 
                 {alerts.map(alert => (
                     <Alert
@@ -87,12 +87,12 @@ const AlertTest: React.FC = () => {
                 ))}
 
                 {alerts.length === 0 && (
-                    <p className="text-gray-500">Hiç alert yok. Yukarıdaki düğmelerden ekleyebilirsiniz.</p>
+                    <p className="text-gray-500 dark:text-gray-400">Hiç alert yok. Yukarıdaki düğmelerden ekleyebilirsiniz.</p>
                 )}
             </div>
 
             <div className="mt-8">
-                <h2 className="mb-4 text-xl font-medium">Otomatik Kapanan Alert</h2>
+                <h2 className="mb-4 text-xl font-medium text-gray-800 dark:text-gray-200">Otomatik Kapanan Alert</h2>
                 <Button
                     onClick={() => {
                         const id = Date.now();

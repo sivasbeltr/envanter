@@ -33,7 +33,7 @@ const ComponentsOverviewTest: React.FC = () => {
 
     return (
         <div className="space-y-6">
-            <h1 className="text-2xl font-bold mb-4">Tüm Bileşenler</h1>
+            <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Tüm Bileşenler</h1>
 
             <p className="mb-6 text-gray-600 dark:text-gray-300">
                 Bu sayfa, sistemde mevcut olan tüm UI bileşenlerinin test sayfalarını bir araya getirir.
