@@ -37,7 +37,6 @@
   <!-- Create frontend directory structure if it doesn't exist -->
   <Target Name="CreateFrontendDirectories" BeforeTargets="NpmInstall">
     <MakeDir Directories="$(FrontendDirectory)" Condition="!Exists('$(FrontendDirectory)')" />
-    <MakeDir Directories="$(FrontendDirectory)\Scripts" Condition="!Exists('$(FrontendDirectory)\Scripts')" />
   </Target>
 
 </Project>
