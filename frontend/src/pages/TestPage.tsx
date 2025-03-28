@@ -10,6 +10,9 @@ import AccordionTest from './test/AccordionTest';
 import CardTest from './test/CardTest';
 import TimelineTest from './test/TimelineTest';
 import StepperTest from './test/StepperTest';
+import ChartTest from './test/ChartTest';
+import PickerDialogTest from './test/input/PickerDialogTest';
+import RangeSliderTest from './test/RangeSliderTest';
 
 /**
  * Test page component to demonstrate various UI components
@@ -40,6 +43,10 @@ const TestPage: React.FC = () => {
                     <InputTest />
                 </TabPage>
 
+                <TabPage value="charts" label="Grafikler">
+                    <ChartTest />
+                </TabPage>
+
                 <TabPage value="accordions" label="Accordion">
                     <AccordionTest />
                 </TabPage>
@@ -51,8 +58,17 @@ const TestPage: React.FC = () => {
                 <TabPage value="timeline" label="Timeline">
                     <TimelineTest />
                 </TabPage>
+
                 <TabPage value="stepper" label="Stepper">
                     <StepperTest />
+                </TabPage>
+
+                <TabPage value="pickers" label="Seçiciler">
+                    <PickerDialogTest />
+                </TabPage>
+
+                <TabPage value="rangesliders" label="Aralık Seçiciler">
+                    <RangeSliderTest />
                 </TabPage>
             </TabBar>
         </div>

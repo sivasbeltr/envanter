@@ -6,6 +6,8 @@
 - **Backend**: .NET Core providing web services through RESTful APIs
 - **Languages**: Development in English, UI in Turkish
 - **Target Users**: Municipality staff, department managers, and inventory administrators
+- **HTTP Client**: Always use Axios for API requests and data fetching
+- **Charts**: Always use Chart.js for all data visualization needs
 
 ## Architecture & Structure
 
@@ -22,9 +24,10 @@
   - `/components/forms`: Form-related components
   - `/components/layout`: Layout-related components
   - `/components/tables`: Table and list components
+  - `/components/charts`: Chart components based on Chart.js
 - `/pages`: Main application pages/views organized by feature
 - `/models`: TypeScript interfaces and types for API communication
-- `/services`: API services with TypeScript typing
+- `/services`: API services with TypeScript typing and Axios
 - `/utils`: Helper functions and utilities
 - `/hooks`: React custom hooks for shared logic
 - `/context`: React context providers for state management
@@ -126,13 +129,61 @@
 
 ## API Communication
 
+### API Client Configuration
+- Use Axios for all HTTP requests
+- Configure a centralized API client with common settings:
+  ```typescript
+  // apiClient.ts
+  import axios from 'axios';
+  
+  export const apiClient = axios.create({
+    baseURL: process.env.REACT_APP_API_URL || '/api',
+    timeout: 30000,
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  });
+  
+  // Request interceptor for adding auth token
+  apiClient.interceptors.request.use(config => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  });
+  
+  // Response interceptor for error handling
+  apiClient.interceptors.response.use(
+    response => response,
+    error => {
+      // Handle common errors (401, 403, etc.)
+      if (error.response?.status === 401) {
+        // Handle unauthorized access
+      }
+      return Promise.reject(error);
+    }
+  );
+  ```
+
 ### Services
 - Create service classes following the pattern:
   ```typescript
+  import { apiClient } from '../utils/apiClient';
+  
   export class EntityNameService {
     private baseUrl = '/api/route';
     
-    async getAll(): Promise<EntityName[]> { ... }
+    async getAll(): Promise<EntityName[]> {
+      try {
+        const response = await apiClient.get<EntityName[]>(this.baseUrl);
+        return response.data;
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+      }
+    }
+    
     async getById(id: number): Promise<EntityName> { ... }
     async create(entity: EntityNameDto): Promise<EntityName> { ... }
     async update(id: number, entity: EntityNameDto): Promise<EntityName> { ... }
@@ -164,6 +215,123 @@
   export interface AssetUpdateDto {
     name?: string;
     // other optional properties
+  }
+  ```
+
+## Data Visualization
+
+### Chart.js Integration
+- Use Chart.js for all charts and data visualizations
+- Create reusable chart components in the `/components/charts` directory
+- Always provide proper TypeScript types for chart data and options
+- Support both light and dark themes for all charts
+- Include loading states and empty states for all chart components
+
+### Chart Component Guidelines
+- Follow this pattern for chart components:
+  ```typescript
+  import React, { useRef, useEffect } from 'react';
+  import { Chart, ChartData, ChartOptions } from 'chart.js';
+  
+  interface ChartNameProps {
+    data: ChartData;
+    options?: ChartOptions;
+    height?: number | string;
+    width?: number | string;
+    className?: string;
+  }
+  
+  export const ChartName: React.FC<ChartNameProps> = ({
+    data,
+    options = {},
+    height = 300,
+    width = '100%',
+    className = '',
+  }) => {
+    const chartRef = useRef<HTMLCanvasElement>(null);
+    const chartInstance = useRef<Chart | null>(null);
+    
+    useEffect(() => {
+      if (!chartRef.current) return;
+      
+      // Initialize or update chart
+      if (chartInstance.current) {
+        chartInstance.current.data = data;
+        chartInstance.current.update();
+      } else {
+        chartInstance.current = new Chart(chartRef.current, {
+          type: 'bar', // or line, pie, etc.
+          data,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            ...options
+          }
+        });
+      }
+      
+      // Cleanup on unmount
+      return () => {
+        if (chartInstance.current) {
+          chartInstance.current.destroy();
+          chartInstance.current = null;
+        }
+      };
+    }, [data, options]);
+    
+    return (
+      <div 
+        className={`chart-container ${className}`}
+        style={{ height, width }}
+      >
+        <canvas ref={chartRef} />
+      </div>
+    );
+  };
+  ```
+
+### Chart Data Hooks
+- Create custom hooks for fetching and formatting chart data:
+  ```typescript
+  import { useState, useEffect } from 'react';
+  import { apiClient } from '../utils/apiClient';
+  
+  export function useChartData<T>(url: string, interval = 0) {
+    const [data, setData] = useState<T | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<Error | null>(null);
+    
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          setLoading(true);
+          const response = await apiClient.get(url);
+          setData(response.data);
+          setError(null);
+        } catch (err) {
+          setError(err instanceof Error ? err : new Error('Unknown error'));
+          console.error('Chart data fetch error:', err);
+        } finally {
+          setLoading(false);
+        }
+      };
+      
+      fetchData();
+      
+      // Set up polling if interval > 0
+      let timerId: number | null = null;
+      if (interval > 0) {
+        timerId = window.setInterval(fetchData, interval);
+      }
+      
+      return () => {
+        if (timerId !== null) {
+          clearInterval(timerId);
+        }
+      };
+    }, [url, interval]);
+    
+    return { data, loading, error };
   }
   ```
 
@@ -336,7 +504,7 @@ export interface AssetUpdateDto {
 }
 ```
 
-### Service Example:
+### Service Example with Axios:
 ```typescript
 import { Asset, AssetCreateDto, AssetUpdateDto } from '../models/Asset';
 import { apiClient } from '../utils/apiClient';
@@ -393,6 +561,124 @@ export class AssetService {
     }
   }
 }
+```
+
+### Chart Component Example:
+```tsx
+import React, { useRef, useEffect } from 'react';
+import { Chart, registerables } from 'chart.js';
+import { useTheme } from '../../hooks/useTheme';
+
+// Register all Chart.js components
+Chart.register(...registerables);
+
+interface AssetPieChartProps {
+  data: {
+    labels: string[];
+    values: number[];
+  };
+  title?: string;
+  height?: number;
+}
+
+export const AssetPieChart: React.FC<AssetPieChartProps> = ({ data, title, height = 300 }) => {
+  const chartRef = useRef<HTMLCanvasElement>(null);
+  const chartInstance = useRef<Chart | null>(null);
+  const { theme } = useTheme();
+  
+  // Colors for different themes
+  const colors = {
+    light: {
+      backgroundColor: [
+        'rgba(54, 162, 235, 0.5)',
+        'rgba(255, 99, 132, 0.5)',
+        'rgba(255, 206, 86, 0.5)',
+        'rgba(75, 192, 192, 0.5)',
+        'rgba(153, 102, 255, 0.5)',
+      ],
+      borderColor: [
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 99, 132, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+      ],
+      textColor: '#333'
+    },
+    dark: {
+      backgroundColor: [
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(255, 99, 132, 0.7)',
+        'rgba(255, 206, 86, 0.7)',
+        'rgba(75, 192, 192, 0.7)',
+        'rgba(153, 102, 255, 0.7)',
+      ],
+      borderColor: [
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 99, 132, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+      ],
+      textColor: '#fff'
+    }
+  };
+  
+  const currentColors = theme === 'dark' ? colors.dark : colors.light;
+  
+  useEffect(() => {
+    if (!chartRef.current) return;
+    
+    // Destroy existing chart instance if it exists
+    if (chartInstance.current) {
+      chartInstance.current.destroy();
+    }
+    
+    // Create new chart instance
+    chartInstance.current = new Chart(chartRef.current, {
+      type: 'pie',
+      data: {
+        labels: data.labels,
+        datasets: [{
+          data: data.values,
+          backgroundColor: currentColors.backgroundColor,
+          borderColor: currentColors.borderColor,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              color: currentColors.textColor
+            }
+          },
+          title: {
+            display: !!title,
+            text: title || '',
+            color: currentColors.textColor
+          }
+        }
+      }
+    });
+    
+    return () => {
+      if (chartInstance.current) {
+        chartInstance.current.destroy();
+        chartInstance.current = null;
+      }
+    };
+  }, [data, theme, title]);
+  
+  return (
+    <div style={{ height: `${height}px` }}>
+      <canvas ref={chartRef} />
+    </div>
+  );
+};
 ```
 
 ### Component Example:

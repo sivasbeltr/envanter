@@ -1,0 +1,207 @@
+import React, { useState } from 'react';
+import { Panel } from '../../components/common/Panel';
+import { Button } from '../../components/common/Button';
+import { useTheme } from '../../context/ThemeContext';
+
+// Import both old and new range components for comparison
+import DateRangeSlider from '../../components/forms/DateRangeSlider';
+import TimeRangeSlider from '../../components/forms/TimeRangeSlider';
+import DateRangeBrush from '../../components/forms/DateRangeBrush';
+import TimeRangeBrush from '../../components/forms/TimeRangeBrush';
+
+// Import for mini chart mock
+import { LineChart } from '../../components/charts';
+
+/**
+ * Test component for Range Selector examples
+ */
+const RangeSliderTest: React.FC = () => {
+    const { theme } = useTheme();
+
+    // Example date range (3 months)
+    const [dateRange, setDateRange] = useState<[Date, Date]>([
+        new Date(2023, 0, 15), // Jan 15, 2023
+        new Date(2023, 3, 15)  // Apr 15, 2023
+    ]);
+
+    // Example date range for the current year
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const startOfYear = new Date(currentYear, 0, 1);
+    const endOfYear = new Date(currentYear, 11, 31);
+
+    const [yearDateRange, setYearDateRange] = useState<[Date, Date]>([
+        new Date(currentYear, today.getMonth() - 1, 1),
+        new Date(currentYear, today.getMonth() + 1, 0)
+    ]);
+
+    // Example time range (9 AM to 5 PM)
+    const [timeRange, setTimeRange] = useState<[number, number]>([540, 1020]);
+
+    // Example custom time range (work hours)
+    const [workHours, setWorkHours] = useState<[number, number]>([480, 1080]); // 8:00 AM to 6:00 PM
+
+    // Mock chart data for LineChart used as background
+    const mockChartData = {
+        labels: Array.from({ length: 12 }, (_, i) => {
+            const date = new Date(currentYear, i, 1);
+            return date.toLocaleString('tr-TR', { month: 'short' });
+        }),
+        datasets: [{
+            label: 'Veri',
+            data: [65, 59, 80, 81, 56, 55, 40, 35, 55, 60, 47, 75],
+            borderColor: 'rgba(75, 192, 192, 0.8)',
+            tension: 0.4,
+            fill: true,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        }]
+    };
+
+    return (
+        <section>
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+                Aralık Seçiciler
+            </h2>
+
+            {/* Chart Range Selector Examples */}
+            <Panel
+                title="Grafik Tarih Aralığı Seçici"
+                variant="elevated"
+                className="mb-6"
+            >
+                <div className="space-y-10">
+                    {/* Date Range With Chart Background */}
+                    <div>
+                        <h3 className="text-base font-medium text-gray-800 dark:text-gray-200 mb-2">
+                            Grafik Altında Tarih Aralığı Seçici
+                        </h3>
+
+                        {/* Chart Display Area */}
+                        <div className="mb-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+                            <LineChart
+                                data={mockChartData}
+                                height={200}
+                                title="Aylık Veri İstatistikleri"
+                            />
+                        </div>
+
+                        {/* Range Brush Selector */}
+                        <DateRangeBrush
+                            minDate={startOfYear}
+                            maxDate={endOfYear}
+                            value={yearDateRange}
+                            onChange={setYearDateRange}
+                            height={60}
+                            selectionColor={theme === 'dark' ? 'rgba(56, 189, 248, 0.3)' : 'rgba(14, 165, 233, 0.2)'}
+                        />
+
+                        <div className="mt-2 flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                            <div>Seçilen Tarih Aralığı: <span className="font-medium">{yearDateRange[0].toLocaleDateString('tr-TR')}</span> - <span className="font-medium">{yearDateRange[1].toLocaleDateString('tr-TR')}</span></div>
+                            <Button size="sm" variant="secondary" onClick={() => setYearDateRange([startOfYear, endOfYear])}>
+                                Tümünü Göster
+                            </Button>
+                        </div>
+                    </div>
+
+                    {/* Basic Date Range Brush */}
+                    <div>
+                        <h3 className="text-base font-medium text-gray-800 dark:text-gray-200 mb-2">
+                            Basit Tarih Aralığı Seçici
+                        </h3>
+                        <DateRangeBrush
+                            minDate={new Date(2023, 0, 1)}
+                            maxDate={new Date(2023, 11, 31)}
+                            value={dateRange}
+                            onChange={setDateRange}
+                            height={80}
+                        />
+                    </div>
+                </div>
+            </Panel>
+
+            {/* Time Range Examples */}
+            <Panel
+                title="Zaman Aralığı Seçici"
+                variant="elevated"
+                className="mb-6"
+            >
+                <div className="space-y-10">
+                    {/* Time Range Brush */}
+                    <div>
+                        <h3 className="text-base font-medium text-gray-800 dark:text-gray-200 mb-2">
+                            Gün İçi Saat Aralığı
+                        </h3>
+                        <TimeRangeBrush
+                            value={timeRange}
+                            onChange={setTimeRange}
+                            height={60}
+                        />
+                        <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                            Seçilen Saat Aralığı:
+                            <span className="font-medium ml-1">
+                                {Math.floor(timeRange[0] / 60)}:{String(timeRange[0] % 60).padStart(2, '0')} - {Math.floor(timeRange[1] / 60)}:{String(timeRange[1] % 60).padStart(2, '0')}
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* Custom Time Range */}
+                    <div>
+                        <h3 className="text-base font-medium text-gray-800 dark:text-gray-200 mb-2">
+                            12 Saat Formatında Zaman Aralığı
+                        </h3>
+                        <TimeRangeBrush
+                            value={workHours}
+                            onChange={setWorkHours}
+                            height={60}
+                            use24Hour={false}
+                            selectionColor={theme === 'dark' ? 'rgba(139, 92, 246, 0.3)' : 'rgba(124, 58, 237, 0.2)'}
+                        />
+                    </div>
+                </div>
+            </Panel>
+
+            {/* Original Range Slider Examples (for comparison) */}
+            <Panel
+                title="Eski Stil Aralık Seçiciler"
+                subtitle="Karşılaştırma için"
+                variant="elevated"
+                className="mb-6"
+            >
+                <div className="space-y-6">
+                    <div>
+                        <h3 className="text-base font-medium text-gray-800 dark:text-gray-200 mb-4">
+                            Slider Tarzı Tarih Aralığı
+                        </h3>
+                        <div className="px-4 py-6">
+                            <DateRangeSlider
+                                minDate={new Date(2023, 0, 1)}
+                                maxDate={new Date(2023, 11, 31)}
+                                value={dateRange}
+                                onChange={setDateRange}
+                                tickCount={6}
+                                primaryColor={theme === 'dark' ? '#60a5fa' : '#3b82f6'}
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 className="text-base font-medium text-gray-800 dark:text-gray-200 mb-4">
+                            Slider Tarzı Zaman Aralığı
+                        </h3>
+                        <div className="px-4 py-6">
+                            <TimeRangeSlider
+                                value={timeRange}
+                                onChange={setTimeRange}
+                                stepMinutes={30}
+                                tickCount={8}
+                                primaryColor={theme === 'dark' ? '#60a5fa' : '#3b82f6'}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </Panel>
+        </section>
+    );
+};
+
+export default RangeSliderTest;
