@@ -28,6 +28,7 @@ import {
     AdjustmentsHorizontalIcon,
     ArrowsUpDownIcon
 } from '@heroicons/react/24/solid';
+import TreeTest from './test/TreeTest';
 
 /**
  * Test page component to demonstrate various UI components
@@ -84,6 +85,9 @@ const TestPage: React.FC = () => {
 
                 <TabPage value="rangesliders" label="Aralık Seçiciler" icon={<ArrowsUpDownIcon className="w-4 h-4" />}>
                     <RangeSliderTest />
+                </TabPage>
+                <TabPage value="tree" label="Ağaç Yapısı" icon={<ArrowsUpDownIcon className="w-4 h-4" />}>
+                    <TreeTest />
                 </TabPage>
 
                 <TabPage value="overview" label="Diğer Bileşenler" icon={<Squares2X2Icon className="w-4 h-4" />}>

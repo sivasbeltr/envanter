@@ -42,14 +42,15 @@ const RangeSliderTest: React.FC = () => {
     const [workHours, setWorkHours] = useState<[number, number]>([28800, 64800]); // 8:00:00 AM to 6:00:00 PM
 
     // Mock chart data for LineChart used as background
+    // Generate random data for the mock chart
     const mockChartData = {
-        labels: Array.from({ length: 12 }, (_, i) => {
-            const date = new Date(currentYear, i, 1);
+        labels: Array.from({ length: 12 }, (_) => {
+            const date = new Date(currentYear);
             return date.toLocaleString('tr-TR', { month: 'short' });
         }),
         datasets: [{
             label: 'Veri',
-            data: [65, 59, 80, 81, 56, 55, 40, 35, 55, 60, 47, 75],
+            data: Array.from({ length: 12 }, () => Math.floor(Math.random() * 100) + 20), // Random values between 20 and 120
             borderColor: 'rgba(75, 192, 192, 0.8)',
             tension: 0.4,
             fill: true,
@@ -98,7 +99,7 @@ const RangeSliderTest: React.FC = () => {
                             minDate={startOfYear}
                             maxDate={endOfYear}
                             value={yearDateRange}
-                            onChange={setYearDateRange}
+                            onChangeEnd={setYearDateRange}
                             height={60}
                             selectionColor={theme === 'dark' ? 'rgba(56, 189, 248, 0.3)' : 'rgba(14, 165, 233, 0.2)'}
                         />

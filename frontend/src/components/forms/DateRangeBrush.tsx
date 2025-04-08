@@ -12,7 +12,9 @@ export interface DateRangeBrushProps {
     /** Currently selected date range [startDate, endDate] */
     value: [Date, Date];
     /** Called when the selected range changes */
-    onChange: (value: [Date, Date]) => void;
+    onChange?: (value: [Date, Date]) => void;
+    /** Called when the selection is finalized (after brushing ends) */
+    onChangeEnd?: (value: [Date, Date]) => void;
     /** Height of the brush area */
     height?: number;
     /** Optional background element (like a mini chart) */
@@ -40,6 +42,7 @@ export interface DateRangeBrushProps {
  *   maxDate={new Date(2023, 11, 31)}
  *   value={[new Date(2023, 2, 1), new Date(2023, 5, 30)]}
  *   onChange={handleDateRangeChange}
+ *   onChangeEnd={handleDateRangeFinalized}
  * />
  */
 const DateRangeBrush: React.FC<DateRangeBrushProps> = ({
@@ -47,6 +50,7 @@ const DateRangeBrush: React.FC<DateRangeBrushProps> = ({
     maxDate,
     value,
     onChange,
+    onChangeEnd,
     height = 80,
     backgroundElement,
     dateFormat = 'dd.MM.yyyy',
@@ -94,7 +98,20 @@ const DateRangeBrush: React.FC<DateRangeBrushProps> = ({
             new Date(newValues[0]),
             new Date(newValues[1])
         ];
-        onChange(newDates);
+        if (onChange) {
+            onChange(newDates);
+        }
+    };
+
+    // Handle onChangeEnd from the underlying brush
+    const handleChangeEnd = (newValues: [number, number]) => {
+        if (onChangeEnd) {
+            const newDates: [Date, Date] = [
+                new Date(newValues[0]),
+                new Date(newValues[1])
+            ];
+            onChangeEnd(newDates);
+        }
     };
 
     // Custom content to render in the selection area
@@ -150,6 +167,7 @@ const DateRangeBrush: React.FC<DateRangeBrushProps> = ({
             max={maxTime}
             value={valueTime}
             onChange={handleChange}
+            onChangeEnd={handleChangeEnd}
             height={height}
             backgroundElement={backgroundElement || renderCalendarBackground()}
             formatValue={formatDate}

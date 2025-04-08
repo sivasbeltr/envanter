@@ -25,6 +25,7 @@
   - `/components/layout`: Layout-related components
   - `/components/tables`: Table and list components
   - `/components/charts`: Chart components based on Chart.js
+  - `/components/data`: Tree and DataTable components
 - `/pages`: Main application pages/views organized by feature
 - `/models`: TypeScript interfaces and types for API communication
 - `/services`: API services with TypeScript typing and Axios

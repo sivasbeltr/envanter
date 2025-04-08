@@ -9,19 +9,20 @@ import { ChartData } from 'chart.js';
  */
 const ChartTest: React.FC = () => {
     // Demo data for bar chart
+    // Demo data for bar chart
     const barChartData: ChartData = {
         labels: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran'],
         datasets: [
             {
                 label: 'Gelir (₺)',
-                data: [12000, 19000, 15000, 25000, 22000, 30000],
+                data: Array.from({ length: 6 }, () => Math.floor(Math.random() * 25000) + 10000),
                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
                 borderColor: 'rgb(54, 162, 235)',
                 borderWidth: 1
             },
             {
                 label: 'Gider (₺)',
-                data: [10000, 15000, 12000, 18000, 15000, 20000],
+                data: Array.from({ length: 6 }, () => Math.floor(Math.random() * 15000) + 8000),
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 borderColor: 'rgb(255, 99, 132)',
                 borderWidth: 1
@@ -35,19 +36,19 @@ const ChartTest: React.FC = () => {
         datasets: [
             {
                 label: 'Bilgisayar',
-                data: [65, 20, 45, 30, 25],
+                data: Array.from({ length: 5 }, () => Math.floor(Math.random() * 50) + 10),
                 backgroundColor: 'rgba(54, 162, 235, 0.6)',
                 borderColor: 'rgba(54, 162, 235, 1)'
             },
             {
                 label: 'Mobilya',
-                data: [28, 48, 40, 19, 36],
+                data: Array.from({ length: 5 }, () => Math.floor(Math.random() * 40) + 15),
                 backgroundColor: 'rgba(255, 99, 132, 0.6)',
                 borderColor: 'rgba(255, 99, 132, 1)'
             },
             {
                 label: 'Ofis Ekipmanı',
-                data: [15, 30, 25, 45, 30],
+                data: Array.from({ length: 5 }, () => Math.floor(Math.random() * 35) + 10),
                 backgroundColor: 'rgba(255, 205, 86, 0.6)',
                 borderColor: 'rgba(255, 205, 86, 1)'
             }
